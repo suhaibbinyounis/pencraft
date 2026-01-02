@@ -241,8 +241,8 @@ class WebScraper:
         """
         # Try og:title first
         og_title = soup.find("meta", property="og:title")
-        if og_title and og_title.get("content"):
-            return str(og_title.get("content", ""))
+        if og_title and og_title.get("content"):  # type: ignore[union-attr]
+            return str(og_title.get("content", ""))  # type: ignore[union-attr]
 
         # Try title tag
         if soup.title and soup.title.string:
@@ -266,13 +266,13 @@ class WebScraper:
         """
         # Try og:description
         og_desc = soup.find("meta", property="og:description")
-        if og_desc and og_desc.get("content"):
-            return str(og_desc.get("content", ""))
+        if og_desc and og_desc.get("content"):  # type: ignore[union-attr]
+            return str(og_desc.get("content", ""))  # type: ignore[union-attr]
 
         # Try meta description
         meta_desc = soup.find("meta", attrs={"name": "description"})
-        if meta_desc and meta_desc.get("content"):
-            return str(meta_desc.get("content", ""))
+        if meta_desc and meta_desc.get("content"):  # type: ignore[union-attr]
+            return str(meta_desc.get("content", ""))  # type: ignore[union-attr]
 
         return ""
 
