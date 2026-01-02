@@ -1,0 +1,102 @@
+# OpenBlog Configuration Example
+# Copy this file to openblog.yaml and customize as needed
+
+# LLM Settings
+llm:
+  # Base URL for OpenAI-compatible API
+  # Default: http://localhost:3030 (for local LLM servers like LM Studio, Ollama)
+  base_url: "http://localhost:3030"
+
+  # API key (can be dummy for local endpoints)
+  api_key: "your-api-key-here"
+
+  # Model to use
+  model: "gpt-4"
+
+  # Temperature (0.0-2.0, higher = more creative)
+  temperature: 0.7
+
+  # Maximum tokens to generate
+  max_tokens: 4096
+
+  # Request timeout in seconds
+  timeout: 120.0
+
+  # Number of retries for failed requests
+  max_retries: 3
+
+# Research Settings
+research:
+  # Maximum search results to fetch
+  max_search_results: 10
+
+  # Maximum sources to include in citations
+  max_sources: 5
+
+  # Search depth (1-5, higher = more thorough)
+  search_depth: 2
+
+  # Include snippets from sources
+  include_snippets: true
+
+# Output Settings
+output:
+  # Output directory for generated blogs
+  directory: "./output"
+
+  # Output format (markdown, html)
+  format: "markdown"
+
+  # Create subdirectories for each post
+  create_subdirs: true
+
+  # Filename template
+  filename_template: "{slug}.md"
+
+# Hugo Settings
+hugo:
+  # Frontmatter format (yaml, toml, json)
+  frontmatter_format: "yaml"
+
+  # Default frontmatter fields
+  default_frontmatter:
+    draft: false
+    toc: true
+    author: "OpenBlog AI"
+
+  # Hugo content directory
+  content_dir: "content/posts"
+
+# Blog Settings
+blog:
+  # Minimum word count
+  min_word_count: 1500
+
+  # Maximum word count
+  max_word_count: 5000
+
+  # Include table of contents
+  include_toc: true
+
+  # Include source citations
+  include_citations: true
+
+  # Default tags for all posts
+  default_tags: []
+
+  # Default categories for all posts
+  default_categories: []
+
+# Custom Prompt Templates (optional - uncomment to customize)
+# prompts:
+#   research_system: |
+#     You are a professional research assistant...
+#   planner_system: |
+#     You are an expert blog content strategist...
+#   writer_system: |
+#     You are a professional blog writer...
+
+# General Settings
+verbose: false
+debug: false
+# log_file: "./openblog.log"
