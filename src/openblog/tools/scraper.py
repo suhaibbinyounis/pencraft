@@ -329,7 +329,7 @@ class WebScraper:
         """Close the HTTP client."""
         self._client.close()
 
-    def __enter__(self) -> "WebScraper":
+    def __enter__(self) -> WebScraper:
         """Context manager entry."""
         return self
 

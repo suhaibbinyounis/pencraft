@@ -23,7 +23,7 @@ class Section:
 
     title: str
     key_points: list[str] = field(default_factory=list)
-    subsections: list["Section"] = field(default_factory=list)
+    subsections: list[Section] = field(default_factory=list)
     estimated_words: int = 0
 
     def to_dict(self) -> dict[str, Any]:

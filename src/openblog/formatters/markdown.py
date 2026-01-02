@@ -198,7 +198,7 @@ class MarkdownFormatter:
         for row in rows:
             # Pad row if needed
             padded_row = row + [""] * (len(headers) - len(row))
-            data_rows.append("| " + " | ".join(padded_row[:len(headers)]) + " |")
+            data_rows.append("| " + " | ".join(padded_row[: len(headers)]) + " |")
 
         return "\n".join([header_row, separator_row] + data_rows)
 
@@ -339,11 +339,13 @@ class MarkdownFormatter:
         for match in re.finditer(pattern, content, re.MULTILINE):
             level = len(match.group(1))
             text = match.group(2).strip()
-            headings.append({
-                "level": level,
-                "text": text,
-                "slug": MarkdownFormatter.slugify(text),
-            })
+            headings.append(
+                {
+                    "level": level,
+                    "text": text,
+                    "slug": MarkdownFormatter.slugify(text),
+                }
+            )
 
         return headings
 

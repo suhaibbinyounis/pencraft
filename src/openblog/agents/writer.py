@@ -73,7 +73,7 @@ class WriterAgent(BaseAgent):
         research_summary: str,
         *,
         sources: list[dict[str, Any]] | None = None,
-        style_notes: str = "",
+        _style_notes: str = "",
     ) -> AgentResult:
         """Write a complete blog post.
 
@@ -164,7 +164,7 @@ class WriterAgent(BaseAgent):
         research_summary: str,
         *,
         sources: list[dict[str, Any]] | None = None,
-        style_notes: str = "",
+        _style_notes: str = "",
     ) -> AgentResult:
         """Write a complete blog post asynchronously.
 
@@ -240,7 +240,7 @@ class WriterAgent(BaseAgent):
         except Exception as e:
             return self._handle_error(e, "Async writing failed")
 
-    def _write_introduction(self, outline: BlogOutline, target_words: int) -> str:
+    def _write_introduction(self, outline: BlogOutline, _target_words: int) -> str:
         """Write the introduction section.
 
         Args:
@@ -265,7 +265,7 @@ class WriterAgent(BaseAgent):
             system_prompt=self.settings.prompts.writer_system,
         )
 
-    async def _awrite_introduction(self, outline: BlogOutline, target_words: int) -> str:
+    async def _awrite_introduction(self, outline: BlogOutline, _target_words: int) -> str:
         """Write introduction asynchronously."""
         outline_summary = "\n".join(
             f"- {s.title}: {', '.join(s.key_points[:3])}" for s in outline.sections
@@ -308,7 +308,9 @@ class WriterAgent(BaseAgent):
         )
 
         # Truncate previous content to avoid token limits
-        prev_summary = previous_content[-1500:] if len(previous_content) > 1500 else previous_content
+        prev_summary = (
+            previous_content[-1500:] if len(previous_content) > 1500 else previous_content
+        )
 
         prompt = SECTION_PROMPT.format(
             title=outline.title,
@@ -338,7 +340,9 @@ class WriterAgent(BaseAgent):
             + [f"  - Subsection: {sub.title}" for sub in section.subsections]
         )
 
-        prev_summary = previous_content[-1500:] if len(previous_content) > 1500 else previous_content
+        prev_summary = (
+            previous_content[-1500:] if len(previous_content) > 1500 else previous_content
+        )
 
         prompt = SECTION_PROMPT.format(
             title=outline.title,
@@ -354,7 +358,7 @@ class WriterAgent(BaseAgent):
             system_prompt=self.settings.prompts.writer_system,
         )
 
-    def _write_conclusion(self, outline: BlogOutline, content_parts: list[str]) -> str:
+    def _write_conclusion(self, outline: BlogOutline, _content_parts: list[str]) -> str:
         """Write the conclusion.
 
         Args:
@@ -378,7 +382,7 @@ class WriterAgent(BaseAgent):
             system_prompt=self.settings.prompts.writer_system,
         )
 
-    async def _awrite_conclusion(self, outline: BlogOutline, content_parts: list[str]) -> str:
+    async def _awrite_conclusion(self, outline: BlogOutline, _content_parts: list[str]) -> str:
         """Write conclusion asynchronously."""
         main_points = "\n".join(f"- {s.title}" for s in outline.sections)
 
@@ -442,7 +446,7 @@ class WriterAgent(BaseAgent):
 **Section Title:** {section_title}
 
 **Key Points to Cover:**
-{chr(10).join(f'- {p}' for p in key_points)}
+{chr(10).join(f"- {p}" for p in key_points)}
 
 **Context:**
 {context}

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Annotated, Optional
+from typing import Annotated
 
 import typer
 from rich.console import Console
@@ -33,7 +33,7 @@ def version_callback(value: bool) -> None:
 @app.callback()
 def main(
     version: Annotated[
-        Optional[bool],
+        bool | None,
         typer.Option(
             "--version",
             "-v",
@@ -62,15 +62,15 @@ def write(
         typer.Option("--words", "-w", help="Target word count"),
     ] = 2000,
     tags: Annotated[
-        Optional[str],
+        str | None,
         typer.Option("--tags", "-t", help="Comma-separated tags"),
     ] = None,
     categories: Annotated[
-        Optional[str],
+        str | None,
         typer.Option("--categories", "-c", help="Comma-separated categories"),
     ] = None,
     author: Annotated[
-        Optional[str],
+        str | None,
         typer.Option("--author", "-a", help="Author name"),
     ] = None,
     draft: Annotated[
@@ -82,7 +82,7 @@ def write(
         typer.Option("--skip-research", help="Skip research phase"),
     ] = False,
     config_file: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--config", help="Path to config file"),
     ] = None,
     verbose: Annotated[
@@ -167,18 +167,18 @@ def write(
 
     except Exception as e:
         console.print(f"[bold red]Error:[/bold red] {e}")
-        raise typer.Exit(code=1)
+        raise typer.Exit(code=1) from e
 
 
 @app.command()
 def research(
     topic: Annotated[str, typer.Argument(help="Topic to research")],
     output: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--output", "-o", help="Save research to file"),
     ] = None,
     config_file: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--config", help="Path to config file"),
     ] = None,
     verbose: Annotated[
@@ -220,7 +220,7 @@ def research(
 
     except Exception as e:
         console.print(f"[bold red]Error:[/bold red] {e}")
-        raise typer.Exit(code=1)
+        raise typer.Exit(code=1) from e
 
 
 @app.command()
@@ -231,11 +231,11 @@ def outline(
         typer.Option("--words", "-w", help="Target word count"),
     ] = 2000,
     output: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--output", "-o", help="Save outline to file"),
     ] = None,
     config_file: Annotated[
-        Optional[Path],
+        Path | None,
         typer.Option("--config", help="Path to config file"),
     ] = None,
 ) -> None:
@@ -273,7 +273,7 @@ def outline(
 
     except Exception as e:
         console.print(f"[bold red]Error:[/bold red] {e}")
-        raise typer.Exit(code=1)
+        raise typer.Exit(code=1) from e
 
 
 @app.command(name="config")

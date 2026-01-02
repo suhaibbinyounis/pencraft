@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING, Any, AsyncGenerator, Generator
+from collections.abc import AsyncGenerator, Generator
+from typing import TYPE_CHECKING, Any
 
 from openai import AsyncOpenAI, OpenAI
 
@@ -247,7 +248,7 @@ class LLMClient:
         """Close the async client connections."""
         await self._async_client.close()
 
-    def __enter__(self) -> "LLMClient":
+    def __enter__(self) -> LLMClient:
         """Context manager entry."""
         return self
 
@@ -255,7 +256,7 @@ class LLMClient:
         """Context manager exit."""
         self.close()
 
-    async def __aenter__(self) -> "LLMClient":
+    async def __aenter__(self) -> LLMClient:
         """Async context manager entry."""
         return self
 

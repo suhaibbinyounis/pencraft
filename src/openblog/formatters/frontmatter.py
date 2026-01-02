@@ -207,7 +207,7 @@ class FrontmatterGenerator:
             end = content.find("---", 3)
             if end != -1:
                 yaml_content = content[3:end].strip()
-                body = content[end + 3:].strip()
+                body = content[end + 3 :].strip()
                 try:
                     fm = yaml.safe_load(yaml_content) or {}
                     return fm, body
@@ -219,7 +219,7 @@ class FrontmatterGenerator:
             end = content.find("+++", 3)
             if end != -1:
                 toml_content = content[3:end].strip()
-                body = content[end + 3:].strip()
+                body = content[end + 3 :].strip()
                 # Simple TOML parsing
                 fm = self._parse_simple_toml(toml_content)
                 return fm, body
@@ -242,7 +242,7 @@ class FrontmatterGenerator:
                 import json
 
                 json_content = content[: end + 1]
-                body = content[end + 1:].strip()
+                body = content[end + 1 :].strip()
                 try:
                     fm = json.loads(json_content)
                     return fm, body
@@ -282,13 +282,14 @@ class FrontmatterGenerator:
                     # Array
                     items = value[1:-1].split(",")
                     result[key] = [
-                        item.strip().strip('"').strip("'")
-                        for item in items
-                        if item.strip()
+                        item.strip().strip('"').strip("'") for item in items if item.strip()
                     ]
-                elif value.startswith('"') and value.endswith('"'):
-                    result[key] = value[1:-1]
-                elif value.startswith("'") and value.endswith("'"):
+                elif (
+                    value.startswith('"')
+                    and value.endswith('"')
+                    or value.startswith("'")
+                    and value.endswith("'")
+                ):
                     result[key] = value[1:-1]
                 else:
                     try:

@@ -38,9 +38,7 @@ def configure_logging(
     # Default format
     if format_string is None:
         if debug:
-            format_string = (
-                "%(asctime)s | %(levelname)-8s | %(name)s:%(lineno)d | %(message)s"
-            )
+            format_string = "%(asctime)s | %(levelname)-8s | %(name)s:%(lineno)d | %(message)s"
         else:
             format_string = "%(asctime)s | %(levelname)-8s | %(message)s"
 

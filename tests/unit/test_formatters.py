@@ -1,7 +1,5 @@
 """Tests for formatters."""
 
-import pytest
-
 from openblog.formatters.citations import Citation, CitationFormatter
 from openblog.formatters.frontmatter import FrontmatterGenerator
 from openblog.formatters.markdown import MarkdownFormatter

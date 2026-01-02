@@ -1,7 +1,5 @@
 """Tests for configuration settings."""
 
-import pytest
-
 from openblog.config.settings import Settings, load_settings
 
 

@@ -10,8 +10,7 @@ from typing import TYPE_CHECKING, Any
 
 from openblog.agents.planner import BlogOutline, PlannerAgent
 from openblog.agents.research import ResearchAgent
-from openblog.agents.writer import BlogPost, WriterAgent
-from openblog.formatters.citations import CitationFormatter
+from openblog.agents.writer import WriterAgent
 from openblog.formatters.frontmatter import FrontmatterGenerator
 from openblog.formatters.markdown import MarkdownFormatter
 from openblog.llm.client import LLMClient

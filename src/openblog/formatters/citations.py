@@ -274,7 +274,7 @@ class CitationFormatter:
         cls,
         sources: list[dict[str, Any]],
         style: str = "markdown",
-    ) -> "CitationFormatter":
+    ) -> CitationFormatter:
         """Create formatter from a list of source dictionaries.
 
         Args:

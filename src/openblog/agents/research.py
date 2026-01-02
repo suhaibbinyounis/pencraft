@@ -369,21 +369,25 @@ Return only the search queries, one per line, without numbering or explanation."
         # Add sources from scraped content first (more reliable)
         for content in scraped_content:
             if content.success and content.url not in seen_urls:
-                sources.append({
-                    "title": content.title,
-                    "url": content.url,
-                    "description": content.meta_description,
-                })
+                sources.append(
+                    {
+                        "title": content.title,
+                        "url": content.url,
+                        "description": content.meta_description,
+                    }
+                )
                 seen_urls.add(content.url)
 
         # Add sources from search results
         for result in search_results:
             if result.url not in seen_urls:
-                sources.append({
-                    "title": result.title,
-                    "url": result.url,
-                    "description": result.snippet,
-                })
+                sources.append(
+                    {
+                        "title": result.title,
+                        "url": result.url,
+                        "description": result.snippet,
+                    }
+                )
                 seen_urls.add(result.url)
 
             if len(sources) >= self.settings.research.max_sources:
