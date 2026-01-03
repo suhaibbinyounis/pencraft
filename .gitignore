@@ -93,12 +93,10 @@ config.local.toml
 .env.local
 
 # Output directories
-output/
+
 generated/
 blogs/
 
-# Generation scripts (user-specific)
-generate_*.py
 
 # OS files
 .DS_Store
