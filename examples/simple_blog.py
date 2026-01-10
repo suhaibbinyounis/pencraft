@@ -53,7 +53,7 @@ def main() -> None:
     )
 
     # Display results
-    print(f"\n✅ Blog generated successfully!")
+    print("\n✅ Blog generated successfully!")
     print(f"   Title: {blog.title}")
     print(f"   Words: {blog.word_count}")
     print(f"   Time: {blog.generation_time:.2f}s")

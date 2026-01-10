@@ -123,12 +123,12 @@ MARKDOWN_TEMPLATES = {
 
 # Layout types for dynamic detection
 LAYOUT_TYPES = [
-    "deep-dive",      # Complex exploratory analysis
-    "narrative",      # Story-driven, personal
-    "analytical",     # Data-focused comparison
-    "how-to",         # Step-by-step practical guide
-    "opinion",        # Argument with evidence
-    "listicle",       # Numbered insights (use sparingly)
+    "deep-dive",  # Complex exploratory analysis
+    "narrative",  # Story-driven, personal
+    "analytical",  # Data-focused comparison
+    "how-to",  # Step-by-step practical guide
+    "opinion",  # Argument with evidence
+    "listicle",  # Numbered insights (use sparingly)
 ]
 
 # Words/phrases to avoid for human-like content

@@ -9,7 +9,6 @@ This example shows:
 - Multiple output formats
 """
 
-import asyncio
 from pathlib import Path
 
 from openblog import Settings
@@ -78,8 +77,7 @@ def step_by_step_generation() -> None:
         title=outline["title"],
         meta_description=outline["meta_description"],
         sections=[
-            Section(title=s["title"], key_points=s["key_points"])
-            for s in outline["sections"]
+            Section(title=s["title"], key_points=s["key_points"]) for s in outline["sections"]
         ],
         tags=outline.get("tags", []),
         categories=outline.get("categories", []),
@@ -113,7 +111,7 @@ def step_by_step_generation() -> None:
     output_path.write_text(full_content, encoding="utf-8")
 
     word_count = len(write_result.content.split())
-    print(f"\n✅ Complete!")
+    print("\n✅ Complete!")
     print(f"   Title: {blog_outline.title}")
     print(f"   Words: {word_count}")
     print(f"   File: {output_path}")
@@ -141,7 +139,7 @@ async def async_generation() -> None:
         output_dir=Path("./output"),
     )
 
-    print(f"\n✅ Complete!")
+    print("\n✅ Complete!")
     print(f"   Title: {blog.title}")
     print(f"   Words: {blog.word_count}")
     print(f"   Time: {blog.generation_time:.2f}s")

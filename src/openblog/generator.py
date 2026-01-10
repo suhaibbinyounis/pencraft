@@ -217,7 +217,6 @@ class BlogGenerator:
             categories=outline.categories or categories,
             author=author,
             slug=self.md_formatter.slugify(outline.title),
-
             toc=self.settings.blog.include_toc,
             featured_image=cover_image,
         )

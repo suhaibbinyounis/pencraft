@@ -79,9 +79,9 @@ class TrendsData:
             lines.append("")
 
         if self.regional_interest:
-            top_regions = sorted(
-                self.regional_interest.items(), key=lambda x: x[1], reverse=True
-            )[:5]
+            top_regions = sorted(self.regional_interest.items(), key=lambda x: x[1], reverse=True)[
+                :5
+            ]
             if top_regions:
                 lines.append("**Top Regions:**")
                 for region, score in top_regions:
@@ -197,15 +197,21 @@ class TrendsTool:
                 if topic in topics and topics[topic]:
                     # Top topics
                     top_topics_df = topics[topic].get("top")
-                    if top_topics_df is not None and not top_topics_df.empty and "topic_title" in top_topics_df.columns:
+                    if (
+                        top_topics_df is not None
+                        and not top_topics_df.empty
+                        and "topic_title" in top_topics_df.columns
+                    ):
                         trends_data.related_topics = top_topics_df["topic_title"].tolist()[:5]
 
                     # Rising topics
                     rising_topics_df = topics[topic].get("rising")
-                    if rising_topics_df is not None and not rising_topics_df.empty and "topic_title" in rising_topics_df.columns:
-                        trends_data.rising_topics = rising_topics_df["topic_title"].tolist()[
-                                :5
-                            ]
+                    if (
+                        rising_topics_df is not None
+                        and not rising_topics_df.empty
+                        and "topic_title" in rising_topics_df.columns
+                    ):
+                        trends_data.rising_topics = rising_topics_df["topic_title"].tolist()[:5]
             except Exception as e:
                 logger.warning(f"Could not fetch related topics: {e}")
 
