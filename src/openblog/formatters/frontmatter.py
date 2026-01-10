@@ -144,6 +144,7 @@ class FrontmatterGenerator:
         Returns:
             YAML frontmatter with --- delimiters.
         """
+
         # Custom Dumper to ensure proper list indentation for Hugo compatibility
         class HugoDumper(yaml.SafeDumper):
             pass
