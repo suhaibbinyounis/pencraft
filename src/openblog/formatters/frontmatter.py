@@ -144,12 +144,57 @@ class FrontmatterGenerator:
         Returns:
             YAML frontmatter with --- delimiters.
         """
+        # Custom Dumper to ensure proper list indentation for Hugo compatibility
+        class HugoDumper(yaml.SafeDumper):
+            pass
+
+        # Avoid unnecessary quoting of simple strings
+        def str_representer(dumper: yaml.Dumper, data: str) -> yaml.Node:
+            if "\n" in data:
+                return dumper.represent_scalar("tag:yaml.org,2002:str", data, style="|")
+            return dumper.represent_scalar("tag:yaml.org,2002:str", data)
+
+        HugoDumper.add_representer(str, str_representer)
+
+        # Configure indentation: 2 spaces for mapping, 2 for sequence offset
         yaml_str = yaml.dump(
             data,
+            Dumper=HugoDumper,
             default_flow_style=False,
             allow_unicode=True,
             sort_keys=False,
         )
+
+        # Post-process to fix list indentation for Hugo compatibility
+        # Hugo expects:
+        #   tags:
+        #     - item1
+        # But yaml.dump produces:
+        #   tags:
+        #   - item1
+        lines = yaml_str.split("\n")
+        fixed_lines = []
+        in_list = False
+
+        for line in lines:
+            # Check if this line starts a list key (ends with just ':')
+            if line and not line.startswith(" ") and line.endswith(":"):
+                in_list = True
+                fixed_lines.append(line)
+                continue
+
+            # If we're in a list and this is a list item, add indentation
+            if in_list and line.startswith("- "):
+                fixed_lines.append("  " + line)
+                continue
+
+            # If line doesn't start with space or dash, we're out of the list
+            if line and not line.startswith(" ") and not line.startswith("-"):
+                in_list = False
+
+            fixed_lines.append(line)
+
+        yaml_str = "\n".join(fixed_lines)
         return f"---\n{yaml_str}---\n"
 
     def _format_toml(self, data: dict[str, Any]) -> str:
