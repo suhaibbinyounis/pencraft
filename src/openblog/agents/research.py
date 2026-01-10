@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any
 
@@ -154,7 +155,7 @@ class ResearchAgent(BaseAgent):
                     scraped_content.append(content)
                     self.log(f"   ✓ {content.word_count} words extracted")
                 else:
-                    self.log(f"   ✗ Failed to scrape")
+                    self.log("   ✗ Failed to scrape")
 
             # Synthesize research using LLM
             self.log("✍️ Synthesizing research summary...")

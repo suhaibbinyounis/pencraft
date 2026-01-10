@@ -137,7 +137,7 @@ INTRODUCTION_PROMPT = """You are a senior staff writer at a major publication, w
 - End with a clear transition to the first section
 
 **TONE:**
-Write like you're explaining to a smart friend at a coffee shop - informed but not stuffy, 
+Write like you're explaining to a smart friend at a coffee shop - informed but not stuffy,
 confident but not arrogant. You respect the reader's intelligence.
 
 Write the introduction only. No section headers."""

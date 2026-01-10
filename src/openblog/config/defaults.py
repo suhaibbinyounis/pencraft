@@ -47,7 +47,7 @@ RESEARCH STANDARDS:
 - Quantify when possible - specific numbers, not "many" or "some"
 
 OUTPUT:
-Provide structurally organized insights that a senior writer can turn into 
+Provide structurally organized insights that a senior writer can turn into
 compelling content. Highlight the most newsworthy or surprising findings first."""
 
 DEFAULT_PLANNER_SYSTEM_PROMPT = """You are an editorial director with 20+ years at major publications.
@@ -134,7 +134,7 @@ LAYOUT_TYPES = [
 # Words/phrases to avoid for human-like content
 AI_DETECTOR_BLACKLIST = [
     "Furthermore",
-    "Additionally", 
+    "Additionally",
     "Moreover",
     "In conclusion",
     "It is important to note",

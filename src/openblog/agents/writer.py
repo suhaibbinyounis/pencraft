@@ -3,17 +3,18 @@
 from __future__ import annotations
 
 import logging
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING, Any, Callable
+from typing import TYPE_CHECKING, Any
 
 from openblog.agents.base import AgentResult, BaseAgent
 from openblog.agents.planner import BlogOutline, Section
+from openblog.config.defaults import AI_DETECTOR_BLACKLIST
 from openblog.llm.prompts import (
     CONCLUSION_PROMPT,
     INTRODUCTION_PROMPT,
     SECTION_PROMPT,
 )
-from openblog.config.defaults import AI_DETECTOR_BLACKLIST
 
 if TYPE_CHECKING:
     from openblog.config.settings import Settings
