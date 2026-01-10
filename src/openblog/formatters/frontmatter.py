@@ -148,21 +148,21 @@ class FrontmatterGenerator:
         class HugoDumper(yaml.SafeDumper):
             pass
 
-        # Avoid unnecessary quoting of simple strings
+        # Force all strings to be unquoted single-line (no folding/literal blocks)
         def str_representer(dumper: yaml.Dumper, data: str) -> yaml.Node:
-            if "\n" in data:
-                return dumper.represent_scalar("tag:yaml.org,2002:str", data, style="|")
-            return dumper.represent_scalar("tag:yaml.org,2002:str", data)
+            # Replace newlines with spaces to force single line
+            clean_data = data.replace("\n", " ").strip()
+            return dumper.represent_scalar("tag:yaml.org,2002:str", clean_data)
 
         HugoDumper.add_representer(str, str_representer)
 
-        # Configure indentation: 2 spaces for mapping, 2 for sequence offset
         yaml_str = yaml.dump(
             data,
             Dumper=HugoDumper,
             default_flow_style=False,
             allow_unicode=True,
             sort_keys=False,
+            width=10000,  # Prevent line wrapping
         )
 
         # Post-process to fix list indentation for Hugo compatibility

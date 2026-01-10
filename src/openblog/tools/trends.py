@@ -212,6 +212,8 @@ class TrendsTool:
                         and "topic_title" in rising_topics_df.columns
                     ):
                         trends_data.rising_topics = rising_topics_df["topic_title"].tolist()[:5]
+            except IndexError:
+                logger.info("No related topics found (empty response).")
             except Exception as e:
                 logger.warning(f"Could not fetch related topics: {e}")
 
