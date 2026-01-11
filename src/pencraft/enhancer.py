@@ -616,10 +616,9 @@ class BlogEnhancer:
             raise ValueError(f"Not a directory: {directory}")
 
         # Find matching files
-        if recursive:
-            files = list(directory.rglob(pattern))
-        else:
-            files = list(directory.glob(pattern))
+        files = (
+            list(directory.rglob(pattern)) if recursive else list(directory.glob(pattern))
+        )
 
         # Sort for consistent ordering
         files = sorted(files)
