@@ -105,7 +105,7 @@ class BlogEnhancer:
         self.frontmatter_gen = FrontmatterGenerator(
             format=self.settings.hugo.frontmatter_format
         )
-        self.on_progress = on_progress or (lambda msg: None)
+        self.on_progress = on_progress or (lambda _msg: None)
 
     def _report_progress(self, message: str) -> None:
         """Report progress to callback."""
@@ -230,7 +230,7 @@ class BlogEnhancer:
 
     def _enhance_content(
         self,
-        original_content: str,
+        _original_content: str,
         body_content: str,
         analysis: ContentAnalysis,
         trends_data: str,
